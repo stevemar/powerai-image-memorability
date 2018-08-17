@@ -1,0 +1,11 @@
+*.resolved
+*.pyc
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.tif
+*.tiff
+*.h5
+*.hdf5
+*.mlmodel
