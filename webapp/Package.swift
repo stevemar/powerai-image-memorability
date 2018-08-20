@@ -8,6 +8,6 @@ let package = Package(
         .package(url: "https://github.com/IBM-Swift/Kitura-MustacheTemplateEngine.git", from: "1.8.0")
     ],
     targets: [
-        .target(name: "MemorabilityExtractor", dependencies: ["Kitura", "KituraMustache", "QuartzCore", "CoreImage"]),
+        .target(name: "MemorabilityExtractor", dependencies: ["Kitura", "KituraMustache"])
     ]
 )

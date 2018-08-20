@@ -1,3 +1,5 @@
+*.DS_Store
+.build
 *.resolved
 *.pyc
 *.png

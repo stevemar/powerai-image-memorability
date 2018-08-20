@@ -8,10 +8,12 @@ import Quartz
 import QuartzCore
 
 if #available(OSX 10.13, *) {
-    let currentPath = "/Users/tanmaybakshi/memorability_extractor/"
+    let currentPath = FileManager.default.currentDirectoryPath
+    print("Working in directory: \(currentPath)")
     
     var model: MLModel!
-    model = try! MLModel(contentsOf: MLModel.compileModel(at: URL(fileURLWithPath: "\(currentPath)lamem.mlmodel")))
+    model = try! MLModel(contentsOf: MLModel.compileModel(at: URL(fileURLWithPath: "\(currentPath)/lamem.mlmodel")))
+
     let visionModel = try! VNCoreMLModel(for: model)
     
     let router = Router()
@@ -23,7 +25,9 @@ if #available(OSX 10.13, *) {
     func saveFileFrom(body: ParsedBody) -> (Bool, String) {
         if let multiPart = body.asMultiPart?[0] {
             let filename = multiPart.filename
-            let url = URL(fileURLWithPath: currentPath + "public/" + filename)
+
+            let url = URL(fileURLWithPath: currentPath + "/public/" + filename)
+
             let data = multiPart.body.asRaw
             if let data = data {
                 do {
