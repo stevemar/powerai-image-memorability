@@ -25,8 +25,8 @@ TODO: add flow diagram
 
 ## Included Components
 
-* [IBM Power Systems](https://www-03.ibm.com/systems/power/): A server built with open technologies and designed for mission-critical applications.
-* [IBM PowerAI](https://www.ibm.com/ms-en/marketplace/deep-learning-platform): A software platform that makes deep learning, machine learning, and AI more accessible and better performing.
+* [IBM Power Systems](https://www.ibm.com/it-infrastructure/power): A server built with open technologies and designed for mission-critical applications.
+* [IBM PowerAI](https://www.ibm.com/us-en/marketplace/deep-learning-platform): A software platform that makes deep learning, machine learning, and AI more accessible and better performing.
 * [Kitura](https://www.kitura.io): Kitura is a free and open-source web framework written in Swift, developed by IBM and licensed under Apache 2.0. It’s an HTTP server and web framework for writing Swift server applications.
 
 ## Featured Technologies
@@ -36,13 +36,13 @@ TODO: add flow diagram
 
 # Prerequisites
 
-* If you don't already have a PowerAI server, you can acquire one from [Nimbix](https://www.nimbix.net/ibm) or from the [PowerAI offering](https://console.bluemix.net/catalog/services/powerai) on IBM Cloud.
+* If you don't already have a PowerAI server, you can acquire one from [Nimbix](https://www.nimbix.net/ibm) or from the [PowerAI offering](https://cloud.ibm.com/catalog/services/powerai) on IBM Cloud.
 * macOS 10.13 (High Sierra) or later
 
 # Steps
 
 1. [Clone the repo](#1-clone-the-repo)
-1. [Download the LaMem dataset](#2-download-the-lamem-dataset)
+1. [Download the LaMem data](#2-download-the-lamem-data)
 1. [Train the Keras model](#3-train-the-keras-model)
 1. [Convert the Keras model to a CoreML model](#4-convert-the-keras-model-to-a-coreml-model)
 1. [Run the Kitura web app](#5-run-the-kitura-web-app)
