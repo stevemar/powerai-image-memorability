@@ -1,14 +1,13 @@
-# Predicting Image Memorability with NASNet in Keras on PowerAI
+# Predicting Image Memorability with MemNet in Keras on PowerAI
 
-This code pattern will enable you to build an application that predicts how "unique" or "memorable" images are. You'll do this through the Keras deep learning library, using the NASNet architecture. The dataset this neural network will be trained on is called "LaMem" (Large-scale Image Memorability), by MIT. In order to process the 45,000 training images and 10,000 testing images (224x224 RGB) efficiently, we'll be training the neural network on a PowerAI machine on NIMBIX, enabling us to benefit from NVLink (direct CPU-GPU memory interconnect) without needing any extra code.
+This code pattern will enable you to build an application that predicts how "unique" or "memorable" images are. You'll do this through the Keras deep learning library, using the MemNet architecture. The dataset this neural network will be trained on is called "LaMem" (Large-scale Image Memorability), by MIT. In order to process the 45,000 training images and 10,000 testing images (227x227 RGB) efficiently, we'll be training the neural network on a PowerAI machine on NIMBIX, enabling us to benefit from NVLink (direct CPU-GPU memory interconnect) without needing any extra code.
 Once the model has been trained on PowerAI, we'll convert it to a CoreML model and expose it via a web application written in Swift, running on a Kitura server on macOS.
 
 When the reader has completed this pattern, they'll understand how to:
 
 * Train a Keras model on PowerAI.
 * Use a custom loss function with a Keras model.
-* Use `DataSequence` to generate regressor data for Keras models.
-* Convert Keras models that deal with images to CoreML models.
+* Convert tf.keras models that deal with images to CoreML models.
 * Use the Apple Vision framework with a CoreML model in Swift to get `VNCoreMLFeatureValueObservation`s.
 * Host a Web Server with Kitura
 * Expose a Mustache HTTP template through Kitura
@@ -42,7 +41,7 @@ TODO: add flow diagram
 # Steps
 
 1. [Clone the repo](#1-clone-the-repo)
-1. [Download the LaMem data](#2-download-the-lamem-data)
+1. [Download the LaMem data](#2-download-and-extract-the-lamem-data)
 1. [Train the Keras model](#3-train-the-keras-model)
 1. [Convert the Keras model to a CoreML model](#4-convert-the-keras-model-to-a-coreml-model)
 1. [Run the Kitura web app](#5-run-the-kitura-web-app)
@@ -55,7 +54,7 @@ Clone the `powerai-image-memorability` repo onto both your PowerAI server and lo
 git clone https://www.github.com/IBM/powerai-image-memorability
 ```
 
-### 2. Download the LaMem data
+### 2. Download and extract the LaMem data
 
 To download the LaMem dataset, head over to the `powerai_serverside` directory, and run the following command:
 
@@ -74,17 +73,17 @@ tar -xvf lamem.tar.gz
 To train the Keras model, run the following command inside of the `powerai_serverside` directory:
 
 ```
-python train_nasnet.py
+python train.py
 ```
 
-Once Python script is done running, you'll see a `current_best.hdf5` model in the `powerai_serverside` directory. Copy that over to the `webapp` directory on the macOS machine that you'd like to run the frontend on.
+Once Python script is done running, you'll see a `memnet_model.h5` model in the `powerai_serverside` directory. Copy that over to the `webapp` directory on the macOS machine that you'd like to run the frontend on.
 
 ### 4. Convert the Keras model to a CoreML model
 
 Inside of the `webapp` directory on your macOS machine, run the following Python script to convert your Keras model to a CoreML model:
 
 ```
-python convert_model.py current_best.hdf5
+python convert_model.py memnet_model.h5
 ```
 
 This may take a few minutes, but when you're done, you should see a `lamem.mlmodel` file in the `webapp` directory.
@@ -100,7 +99,3 @@ swift build && swift run
 Now, you can head over to `localhost:3333` in your favourite web browser, upload an image, and calculate its memorability.
 
 TODO: add screenshot
-
-## Links
-
-* [DataSequence](https://techblog.appnexus.com/a-keras-multithreaded-dataframe-generator-for-millions-of-image-files-84d3027f6f43)
